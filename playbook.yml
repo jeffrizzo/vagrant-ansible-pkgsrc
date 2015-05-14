@@ -1,0 +1,18 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+  - name: fetch pkgsrc.tar.xz locally
+    local_action: get_url url=ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc.tar.xz 
+      dest=./pkgsrc.tar.xz
+    sudo: no
+
+  - name: unpack pkgsrc.tar.xz
+    unarchive: src=/vagrant/pkgsrc.tar.xz dest=/usr copy=no
+      creates='/usr/pkgsrc' owner=vagrant
+    notify: cvs update
+
+  handlers:
+  - name: cvs update
+    command: chdir='/usr/pkgsrc' cvs -q update -dP
+
