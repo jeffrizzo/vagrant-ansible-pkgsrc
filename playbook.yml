@@ -2,6 +2,7 @@
 - hosts: all
   sudo: true
   tasks:
+  # We cache pkgsrc.tar.xz as downloaded from NetBSD.org in the current dir.
   - name: fetch pkgsrc.tar.xz locally
     local_action: get_url url=ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc.tar.xz 
       dest=./pkgsrc.tar.xz
