@@ -8,6 +8,8 @@
       dest=./pkgsrc.tar.xz
     sudo: no
 
+  - copy: dest=/etc/mk.conf src=files/mk.conf owner=root mode=0644
+
   - name: unpack pkgsrc.tar.xz
     unarchive: src=/vagrant/pkgsrc.tar.xz dest=/usr copy=no
       creates='/usr/pkgsrc' owner=vagrant
